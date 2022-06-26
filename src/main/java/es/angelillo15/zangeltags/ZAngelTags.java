@@ -12,6 +12,7 @@ public final class ZAngelTags extends JavaPlugin {
     public String version = pdf.getVersion();
     public String prefix = "&b「zAngelTags」";
 
+
     @Override
     public void onEnable() {
 
@@ -19,9 +20,10 @@ public final class ZAngelTags extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&lzAngelTags » &r By Angelillo15"));
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&e&l----------angelillo15.es---------"));
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&e&l---------------"+version+"---------------"));
-        ConfigLoader cl = new ConfigLoader(this);
         registerCommands();
     }
+    public ConfigLoader cl = new ConfigLoader(this);
+
 
     public void registerCommands(){
         this.getCommand("zAngelTags").setExecutor(new MainCommand(this));
