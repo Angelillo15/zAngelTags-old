@@ -2,7 +2,7 @@ name: zAngelTags
 version: '${project.version}'
 main: es.angelillo15.zangeltags.ZAngelTags
 api-version: 1.16
-prefix: [ zAngelTags ]
+prefix: zAngelTags
 authors: [ Angelillo15 ]
 description: Tags plugin
 website: angelillo15.es
@@ -16,5 +16,3 @@ permissions:
     description: Permission to reload
   zAngelTags.admin:
     description: Admin permissions
-    children:
-      zAngelTags.reload

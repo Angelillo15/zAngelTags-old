@@ -19,6 +19,12 @@ public class ConfigLoader {
         MainConfig.saveDefaultConfig();
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Config succesfully reloaded"));
     }
+    public void loadMessages(){
+        MessageConfig = new ConfigManager(plugin, "", "messages.yml");
+        MessageConfig.saveDefaultConfig();
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Messages succesfully oaded"));
+
+    }
     public FileConfiguration getMainConfig(){
         return MainConfig.getConfig();
     }
@@ -29,6 +35,12 @@ public class ConfigLoader {
     public void reloadMainConfig(){
         MainConfig.reloadConfig();
 
+    }
+    public void saveConfig(){
+        MainConfig.saveConfig();
+    }
+    public void saveMessages(){
+        MessageConfig.saveConfig();
     }
     public void reloadMessageConfig(){
         MessageConfig.reloadConfig();
