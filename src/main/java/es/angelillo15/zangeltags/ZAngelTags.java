@@ -11,6 +11,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.Connection;
+import java.util.UUID;
 
 public final class ZAngelTags extends JavaPlugin {
     PluginDescriptionFile pdf = this.getDescription();
@@ -34,6 +35,7 @@ public final class ZAngelTags extends JavaPlugin {
         cl = new ConfigLoader(this);
         dbConnection();
         registerCommands();
+        registerPlaceholder();
 
     }
 
@@ -60,6 +62,14 @@ public final class ZAngelTags extends JavaPlugin {
         return this.connection.getConection();
 
     }
+
+    public void registerPlaceholder(){
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
+            new PlaceHolderApiExtensions(this).register();
+        }
+    }
+
+
 
     @Override
     public void onDisable() {

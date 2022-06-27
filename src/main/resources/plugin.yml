@@ -14,5 +14,11 @@ commands:
 permissions:
   zAngelTags.reload:
     description: Permission to reload
+  zAngelTags.tag:
+    description: tags command
   zAngelTags.admin:
     description: Admin permissions
+    default: op
+    children:
+      zAngelTags.reload: true
+      zAngelTags.tag: true

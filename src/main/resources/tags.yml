@@ -1,0 +1,13 @@
+Tags:
+  example:
+    name: 'Example'
+    inGameTag: '&a&ka&aExample&a&ka'
+    permission: 'zAngelTags.tags.example'
+  admin:
+    name: 'Admin'
+    inGameTag: '&c&ka&cAdmin&c&ka'
+    permission: 'zAngelTags.tags.admin'
+  mod:
+    name: 'Mod'
+    inGameTag: '&b&ka&bMod&b&ka'
+    permission: 'zAngelTags.tags.admin'
