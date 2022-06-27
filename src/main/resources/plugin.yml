@@ -11,14 +11,15 @@ commands:
     description: Main Command of the plugin
   zAngelTags:
     description: Main Command of the plugin
+  tags:
+    description: Main Command of the plugin
 permissions:
+  zAngelTags.tags.all:
+    description: gave all tags for a user
   zAngelTags.reload:
     description: Permission to reload
   zAngelTags.tag:
     description: tags command
-  zAngelTags.tags.disable:
-    description: default
-    default: true
   zAngelTags.admin:
     description: Admin permissions
     default: op

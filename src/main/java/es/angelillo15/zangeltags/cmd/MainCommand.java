@@ -42,16 +42,16 @@ public class MainCommand implements CommandExecutor {
 
 
         }else{
+            FileConfiguration messages = plugin.cl.getMessageConfig();
             Player p = (Player) sender;
-            String noPerm = "&4You don't have perms to execute this command";
+            String noPerm = messages.getString("Messages.noPerm");
             if(args.length < 1){
-                help(p);
+                TagsGui tg = new TagsGui(plugin, p);
                 return true;
             }else{
                 if (args[0].equalsIgnoreCase("Reload")) {
                     if(p.hasPermission("zAngelTags.reload")){
                         PluginReload pr = new PluginReload(plugin);
-                        FileConfiguration messages = plugin.cl.getMessageConfig();
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', messages.getString("Messages.reloadMessage")));
                         return true;
                     }else {
@@ -63,8 +63,6 @@ public class MainCommand implements CommandExecutor {
                 if(args[0].equalsIgnoreCase("gui")){
                     if(p.hasPermission("zAngelTags.gui")){
                         TagsGui tg = new TagsGui(plugin, p);
-
-
                         return true;
                     }else {
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', noPerm));
@@ -90,15 +88,15 @@ public class MainCommand implements CommandExecutor {
 
                     }else if(args[0].equalsIgnoreCase("tag") && (args[1].equalsIgnoreCase("set"))){
                         if(args.length < 3){
-                            p.sendMessage("No tag selected");
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', messages.getString("Messages.noTagSelected")));
                             return true;
                         }else{
                             FileConfiguration tags = plugin.cl.getTagsConfig();
                             Set<String> tagsArray = tags.getConfigurationSection("Tags").getKeys(false);
 
                             if(tags.contains("Tags."+args[2].toLowerCase())){
-                                if(p.hasPermission(tags.getString("Tags."+args[2].toLowerCase()+ ".permission"))){
-                                    p.sendMessage(ChatColor.translateAlternateColorCodes('&',"Select: " + tags.getString("Tags."+args[2].toLowerCase()+".inGameTag" )));
+                                if(p.hasPermission(tags.getString("Tags."+args[2].toLowerCase()+ ".permission")) || p.hasPermission("zAngelTags.tags.all")){
+                                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', messages.getString("Messages.SelectedTag").replace("{tag}", tags.getString("Tags."+args[2].toLowerCase()+".inGameTag" ))));
                                     if(SQLQuerys.playerInDB(plugin.getConnection(), p.getUniqueId())){
                                         SQLQuerys.updateData(plugin.getConnection(), p.getUniqueId(), tags.getString("Tags."+args[2].toLowerCase()+".inGameTag"));
                                     }else {
@@ -112,15 +110,19 @@ public class MainCommand implements CommandExecutor {
 
 
                             }else {
-                                p.sendMessage("No existe");
+                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', messages.getString("Messages.dontExist")));
                                 return true;
                             }
 
                         }
                     }else if(args[0].equalsIgnoreCase("tag") && (args[1].equalsIgnoreCase("get"))){
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bActual tag: "+SQLQuerys.getTag(plugin.getConnection(), p.getUniqueId())));
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', messages.getString("Messages.ActualTag").replace("{tag}", SQLQuerys.getTag(plugin.getConnection(), p.getUniqueId()))));
                         return true;
-                    } else {
+                    }else if(args[0].equalsIgnoreCase("tag") && (args[1].equalsIgnoreCase("disable"))){
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', messages.getString("Messages.DisableTag")));
+                        SQLQuerys.updateData(plugin.getConnection(), p.getUniqueId(), "");
+                        return true;
+                    }else {
                         help(p);
                         return true;
                     }
@@ -142,8 +144,9 @@ public class MainCommand implements CommandExecutor {
         p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bzAngelTags reload &8&l» &f To reload the plugin"));
         p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bzAngelTags tag get &8&l» &f Return your selected"));
         p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bzAngelTags tag list &8&l» &f list all the tags"));
-        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bzAngelTags tag set &8&l» &f set a tag"));
+        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bzAngelTags tag set <tag> &8&l» &f set a tag"));
         p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bzAngelTags gui &8&l» &f open plugin gui "));
+        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bzAngelTags tag disable &8&l» &f open plugin gui "));
 
     }
 }

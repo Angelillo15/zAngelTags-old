@@ -1,6 +1,8 @@
 package es.angelillo15.zangeltags;
 
+import es.angelillo15.zangeltags.bstats.Metrics;
 import es.angelillo15.zangeltags.cmd.MainCommand;
+import es.angelillo15.zangeltags.cmd.TabComplete;
 import es.angelillo15.zangeltags.config.ConfigLoader;
 import es.angelillo15.zangeltags.database.PluginConnection;
 import es.angelillo15.zangeltags.database.SQLQuerys;
@@ -21,6 +23,10 @@ public final class ZAngelTags extends JavaPlugin {
     public String prefix = "&b「zAngelTags」";
     private PluginConnection connection;
     public ConfigLoader cl;
+    //15601
+
+    int pluginId = 15601;
+    Metrics metrics = new Metrics(this, pluginId);
 
     @Override
     public void onEnable() {
@@ -40,6 +46,8 @@ public final class ZAngelTags extends JavaPlugin {
         registerPlaceholder();
         registerEvents();
 
+
+
     }
 
 
@@ -47,6 +55,10 @@ public final class ZAngelTags extends JavaPlugin {
     public void registerCommands(){
         this.getCommand("zAngelTags").setExecutor(new MainCommand(this));
         this.getCommand("zat").setExecutor(new MainCommand(this));
+        this.getCommand("zAngelTags").setTabCompleter(new TabComplete());
+        this.getCommand("zat").setTabCompleter(new TabComplete());
+        this.getCommand("tags").setExecutor(new MainCommand(this));
+        this.getCommand("tags").setTabCompleter(new TabComplete());
     }
 
     public void dbConnection(){

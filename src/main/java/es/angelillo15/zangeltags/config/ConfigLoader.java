@@ -1,7 +1,6 @@
 package es.angelillo15.zangeltags.config;
 
 import es.angelillo15.zangeltags.ZAngelTags;
-import jdk.jfr.internal.tool.Main;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;

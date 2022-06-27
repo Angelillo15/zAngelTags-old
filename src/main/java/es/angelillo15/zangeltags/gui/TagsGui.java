@@ -34,6 +34,7 @@ public class TagsGui {
 
         String BarrierCloseName = config.getString("Gui.BarrierCloseName");
 
+        String DisableName = config.getString("Gui.DisableTag");
 
         Inventory tagGui = Bukkit.createInventory(null, 54, ChatColor.translateAlternateColorCodes('&', Title));
 
@@ -66,6 +67,13 @@ public class TagsGui {
         barrierMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', BarrierCloseName));
         barrier.setItemMeta(barrierMeta);
         tagGui.setItem(49, barrier);
+
+        ItemStack disable  = new ItemStack(Material.NAME_TAG);
+        ItemMeta disableMeta = barrier.getItemMeta();
+        disableMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', DisableName));
+        disable.setItemMeta(disableMeta);
+        tagGui.setItem(53, disable);
+
 
         p.openInventory(tagGui);
 

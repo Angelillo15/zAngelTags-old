@@ -20,6 +20,7 @@ public class TagInventoryClickEvent implements Listener {
     }
     @EventHandler
     public void clickEvent(InventoryClickEvent e){
+        Player p = (Player) e.getWhoClicked();
         String titleConfig = ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&',plugin.cl.getMainConfig().getString("Gui.Tittle")));
         String titleStrip = ChatColor.stripColor(e.getView().getTitle());
 
@@ -29,9 +30,15 @@ public class TagInventoryClickEvent implements Listener {
                 return;
             }else{
                 String close = ChatColor.translateAlternateColorCodes('&', plugin.cl.getMainConfig().getString("Gui.BarrierCloseName"));
+                String disable = ChatColor.translateAlternateColorCodes('&', plugin.cl.getMainConfig().getString("Gui.DisableTag"));
                 String DisableTag = ChatColor.translateAlternateColorCodes('&', plugin.cl.getMainConfig().getString("Gui.DisableTag"));
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals(close)){
                     e.getWhoClicked().closeInventory();
+                    e.setCancelled(true);
+                    return;
+                }
+                if(e.getCurrentItem().getItemMeta().getDisplayName().equals(disable)){
+                    p.performCommand("zat tag disable");
                     e.setCancelled(true);
                     return;
                 }
@@ -41,7 +48,7 @@ public class TagInventoryClickEvent implements Listener {
                 FileConfiguration tags = plugin.cl.getTagsConfig();
                 Set<String> tagsArray = tags.getConfigurationSection("Tags").getKeys(false);
                 List<String> tagsArraya = new ArrayList<>(tagsArray);
-                Player p = (Player) e.getWhoClicked();
+
                 p.performCommand("zat tag set "+tagsArraya.get(e.getSlot()));
                 p.closeInventory();
 

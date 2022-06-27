@@ -1,2 +1,8 @@
 Messages:
-  reloadMessage: '&aConfiguration succesfuly reloaded'
+  reloadMessage: '&aConfiguration successfully reloaded'
+  noPerm: "&4You don't have perms to execute this command"
+  noTagSelected: "&4You don't have selected any tag"
+  dontExist: "&4The following tag doesn't exist"
+  ActualTag: "&bYou have the following tag: {tag}"
+  DisableTag: "&aYou have successfully disable the tag"
+  SelectedTag: "&aYou have selected the following tag: {tag}"
