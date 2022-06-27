@@ -1,2 +1,2 @@
 # zAngelTags-Dev
-Tags plugin initialid made for zMoon.fun
+Tags plugin initially made for zMoon.fun
