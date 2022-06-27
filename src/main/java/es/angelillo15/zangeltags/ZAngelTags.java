@@ -4,10 +4,12 @@ import es.angelillo15.zangeltags.cmd.MainCommand;
 import es.angelillo15.zangeltags.config.ConfigLoader;
 import es.angelillo15.zangeltags.database.PluginConnection;
 import es.angelillo15.zangeltags.database.SQLQuerys;
+import es.angelillo15.zangeltags.events.TagInventoryClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.Connection;
@@ -36,6 +38,7 @@ public final class ZAngelTags extends JavaPlugin {
         dbConnection();
         registerCommands();
         registerPlaceholder();
+        registerEvents();
 
     }
 
@@ -67,6 +70,11 @@ public final class ZAngelTags extends JavaPlugin {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
             new PlaceHolderApiExtensions(this).register();
         }
+
+    }
+    public void registerEvents(){
+        PluginManager pm = this.getServer().getPluginManager();
+        pm.registerEvents(new TagInventoryClickEvent(this), this);
     }
 
 
