@@ -13,16 +13,17 @@ public class ConfigLoader {
     public ConfigLoader(ZAngelTags plugin){
         this.plugin = plugin;
         loadMainConfig();
+        loadMessages();
     }
     public void loadMainConfig(){
         MainConfig = new ConfigManager(plugin, "", "Config.yml");
         MainConfig.saveDefaultConfig();
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Config succesfully reloaded"));
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.prefix+"&6Config succesfully loaded"));
     }
     public void loadMessages(){
         MessageConfig = new ConfigManager(plugin, "", "messages.yml");
         MessageConfig.saveDefaultConfig();
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Messages succesfully oaded"));
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.prefix+"&6Messages succesfully loaded"));
 
     }
     public FileConfiguration getMainConfig(){

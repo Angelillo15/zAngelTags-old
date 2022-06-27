@@ -23,16 +23,14 @@ public class PluginConnection {
         try{
             synchronized (this){
                 if(conection != null && !conection.isClosed()){
-                    Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[ServerWorldPortal] &4Error conecting to database"));
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&l[zAngelTags] &6Error conecting to database"));
                     return;
                 }
                 Class.forName("com.mysql.jdbc.Driver");
                 this.conection = DriverManager.getConnection("jdbc:mysql://"+this.host+":"+this.port+"/"+ this.database, this.user, this.password);
-                Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[ServerWorldPortal] &4Succesfully conected to Database"));
+                Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&b「zAngelTags」&6Succesfully conected to Database"));
 
             }
-
-
         }catch (SQLException e){
             Bukkit.getConsoleSender().sendMessage(String.valueOf(e));
 
