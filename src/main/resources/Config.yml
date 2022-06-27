@@ -11,3 +11,7 @@ database:
   database: 'zangeltags' # name of your database. A database server can contain multiple databases
   user: 'root'
   password: ''
+Gui:
+  Tittle: '&4&lTags'
+  BarrierCloseName: '&c&lClose'
+  TagItemMaterial: 'NETHER_STAR'

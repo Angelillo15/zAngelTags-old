@@ -5,6 +5,7 @@ import es.angelillo15.zangeltags.ZAngelTags;
 import es.angelillo15.zangeltags.config.ConfigLoader;
 import es.angelillo15.zangeltags.config.ConfigManager;
 import es.angelillo15.zangeltags.database.SQLQuerys;
+import es.angelillo15.zangeltags.gui.TagsGui;
 import es.angelillo15.zangeltags.msg.ConsolesMsg;
 import es.angelillo15.zangeltags.msg.PlayersMsg;
 import net.md_5.bungee.api.ChatColor;
@@ -61,6 +62,9 @@ public class MainCommand implements CommandExecutor {
 
                 if(args[0].equalsIgnoreCase("gui")){
                     if(p.hasPermission("zAngelTags.gui")){
+                        TagsGui tg = new TagsGui(plugin, p);
+
+
                         return true;
                     }else {
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', noPerm));

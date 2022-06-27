@@ -11,3 +11,7 @@ Tags:
     name: 'Mod'
     inGameTag: '&b&ka&bMod&b&ka'
     permission: 'zAngelTags.tags.admin'
+  disable:
+    name: 'Disable'
+    inGameTag: ''
+    permission: 'zAngelTags.tags.disable'

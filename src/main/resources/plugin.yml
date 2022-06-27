@@ -16,6 +16,9 @@ permissions:
     description: Permission to reload
   zAngelTags.tag:
     description: tags command
+  zAngelTags.tags.disable:
+    description: default
+    default: true
   zAngelTags.admin:
     description: Admin permissions
     default: op
