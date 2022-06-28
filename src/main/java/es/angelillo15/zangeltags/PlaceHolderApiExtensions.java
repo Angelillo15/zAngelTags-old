@@ -2,20 +2,16 @@ package es.angelillo15.zangeltags;
 
 import es.angelillo15.zangeltags.database.SQLQuerys;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+
 
 public class PlaceHolderApiExtensions extends PlaceholderExpansion {
-
 
     private ZAngelTags plugin;
 
     public PlaceHolderApiExtensions(ZAngelTags plugin) {
         this.plugin = plugin;
     }
-
 
     @Override
     public boolean persist(){
@@ -27,6 +23,7 @@ public class PlaceHolderApiExtensions extends PlaceholderExpansion {
         return true;
     }
 
+
     @Override
     public String getAuthor(){
         return "Angelillo15";
@@ -37,6 +34,7 @@ public class PlaceHolderApiExtensions extends PlaceholderExpansion {
     public String getIdentifier(){
         return "zangeltags";
     }
+
 
     @Override
     public String getVersion(){
