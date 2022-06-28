@@ -43,7 +43,6 @@ public class PlaceHolderApiExtensions extends PlaceholderExpansion {
         return plugin.getDescription().getVersion();
     }
 
-
     @Override
     public String onPlaceholderRequest(Player player, String identifier){
 
