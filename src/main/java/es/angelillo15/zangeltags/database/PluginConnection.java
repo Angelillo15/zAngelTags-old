@@ -30,6 +30,7 @@ public class PluginConnection {
                 this.conection = DriverManager.getConnection("jdbc:mysql://"+this.host+":"+this.port+"/"+ this.database, this.user, this.password);
                 Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&b「zAngelTags」&6Succesfully conected to Database"));
 
+
             }
         }catch (SQLException e){
             Bukkit.getConsoleSender().sendMessage(String.valueOf(e));

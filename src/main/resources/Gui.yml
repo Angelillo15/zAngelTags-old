@@ -1,0 +1,7 @@
+Messages:
+  GuiLore:
+    - '&b----------------------------------------'
+    - '&bTag name: &6{tag_name}'
+    - '&bTag display name: &6{tag_displayName}'
+    - '&bTag permission: &6{tag_perm}'
+    - '&b----------------------------------------'

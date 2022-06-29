@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class TagsGui {
@@ -48,11 +49,21 @@ public class TagsGui {
 
                 ItemMeta meta = item.getItemMeta();
                 ArrayList<String> list = new ArrayList<>();
+                /*
                 list.add(ChatColor.translateAlternateColorCodes('&',"&b----------------------------------------"));
                 list.add(ChatColor.translateAlternateColorCodes('&',"&bTag name: &6" +tags.getString("Tags."+s+ ".name")));
                 list.add(ChatColor.translateAlternateColorCodes('&',"&bTag display name: &6" +tags.getString("Tags."+s+ ".inGameTag")));
                 list.add(ChatColor.translateAlternateColorCodes('&',"&bTag permission: &6" +tags.getString("Tags."+s+ ".permission")));
                 list.add(ChatColor.translateAlternateColorCodes('&',"&b----------------------------------------"));
+                */
+                FileConfiguration gui = plugin.cl.GuiConfig.getConfig();
+                List<String> mensaje = (List<String>) gui.getList("Messages.GuiLore");
+                for (String c : mensaje){
+                    list.add(ChatColor.translateAlternateColorCodes('&', c
+                            .replace("{tag_name}", tags.getString("Tags."+s+ ".name"))
+                            .replace("{tag_displayName}", tags.getString("Tags."+s+ ".inGameTag"))
+                            .replace("{tag_perm}", tags.getString("Tags."+s+ ".permission"))));
+                }
                 meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', tags.getString("Tags."+s+ ".inGameTag")));
                 meta.setLore(list);
                 item.setItemMeta(meta);

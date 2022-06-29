@@ -14,12 +14,18 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.Connection;
 import java.util.UUID;
 
 public final class ZAngelTags extends JavaPlugin {
     PluginDescriptionFile pdf = this.getDescription();
     public String version = pdf.getVersion();
+    public String latestversion;
+
     public String prefix = "&b「zAngelTags」";
     private PluginConnection connection;
     public ConfigLoader cl;
@@ -32,7 +38,7 @@ public final class ZAngelTags extends JavaPlugin {
     public void onEnable() {
 
         // Plugin startup logic
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "\n &bVersion: "+ version+" \n &b" +
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "\n &bVersion: "+ version+" \n " +
                 "███████╗ █████╗ ███╗   ██╗ ██████╗ ███████╗██╗  ████████╗ █████╗  ██████╗ ███████╗\n" +
                 "╚══███╔╝██╔══██╗████╗  ██║██╔════╝ ██╔════╝██║  ╚══██╔══╝██╔══██╗██╔════╝ ██╔════╝\n" +
                 "  ███╔╝ ███████║██╔██╗ ██║██║  ███╗█████╗  ██║     ██║   ███████║██║  ███╗███████╗\n" +
@@ -41,10 +47,12 @@ public final class ZAngelTags extends JavaPlugin {
                 "╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚══════╝╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝")
         );
         cl = new ConfigLoader(this);
+        updateChecker();
         dbConnection();
         registerCommands();
         registerPlaceholder();
         registerEvents();
+
 
 
 
@@ -88,11 +96,32 @@ public final class ZAngelTags extends JavaPlugin {
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvents(new TagInventoryClickEvent(this), this);
     }
+    public void updateChecker(){
+        try {
+            HttpURLConnection con = (HttpURLConnection) new URL(
+                    "https://api.spigotmc.org/legacy/update.php?resource=102952").openConnection();
+            int timed_out = 1250;
+            con.setConnectTimeout(timed_out);
+            con.setReadTimeout(timed_out);
+            latestversion = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
+            if (latestversion.length() <= 7) {
+                if(!version.equals(latestversion)){
+                    Bukkit.getConsoleSender().sendMessage("");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', prefix +"&aThere is a new update of the plugin"));
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA+"「zAngelTags」"+ChatColor.RED+"You can download it at: "+ChatColor.WHITE+"https://www.spigotmc.org/resources/102952/");
+                }
+            }
+        } catch (Exception ex) {
+            Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', prefix+"&4&lERROR CHECKING UPDATES"));
+        }
+    }
+
 
 
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        SQLQuerys.CloseConnection(getConnection());
+        Bukkit.getConsoleSender().sendMessage(net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', this.prefix + "&6Connection closed"));
     }
 }

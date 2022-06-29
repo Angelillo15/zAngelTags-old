@@ -11,6 +11,7 @@ public class PluginReload {
         plugin.cl.reloadMainConfig();
         plugin.cl.reloadMessagesConfig();
         plugin.cl.reloadTagsConfig();
+        plugin.cl.GuiConfig.reloadConfig();
     }
 
 }

@@ -11,10 +11,12 @@ public class ConfigLoader {
 
     public static ConfigManager MessageConfig;
     public static ConfigManager TagsConfig;
+    public static ConfigManager GuiConfig;
     public ConfigLoader(ZAngelTags plugin){
         this.plugin = plugin;
         loadMainConfig();
         loadMessages();
+        loadGuiConfig();
         loadTags();
     }
     public void loadMainConfig(){
@@ -26,6 +28,12 @@ public class ConfigLoader {
         MessageConfig = new ConfigManager(plugin, "", "messages.yml");
         MessageConfig.saveDefaultConfig();
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.prefix+"&6Messages successfully loaded"));
+
+    }
+    public void loadGuiConfig(){
+        GuiConfig = new ConfigManager(plugin, "", "Gui.yml");
+        GuiConfig.saveDefaultConfig();
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.prefix+"&6Gui successfully loaded"));
 
     }
     public void loadTags(){
