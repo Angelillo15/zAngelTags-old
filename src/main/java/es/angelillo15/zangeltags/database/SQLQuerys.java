@@ -1,5 +1,6 @@
 package es.angelillo15.zangeltags.database;
 
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 
 import java.sql.*;
@@ -68,10 +69,12 @@ public class SQLQuerys {
     public static String getTag(Connection connection, UUID uuid){
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT Tag From `user_tags` WHERE UUID=?");
+
             statement.setString(1, uuid.toString());
             ResultSet result = statement.executeQuery();
             if(result.next()){
                 String tag = result.getString("Tag");
+
                 return tag;
             }
 
@@ -81,5 +84,14 @@ public class SQLQuerys {
 
         }
         return "null";
+
     }
+    public static void CloseConnection(Connection connection){
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            Bukkit.getConsoleSender().sendMessage(String.valueOf(e));
+        }
+    }
+
 }
