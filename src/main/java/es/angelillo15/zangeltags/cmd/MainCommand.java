@@ -16,6 +16,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class MainCommand implements CommandExecutor {
@@ -76,13 +79,24 @@ public class MainCommand implements CommandExecutor {
                 if(p.hasPermission("zAngelTags.tag")){
                     if(args[0].equalsIgnoreCase("tag") && (args[1].equalsIgnoreCase("list"))){
                         FileConfiguration tags = plugin.cl.getTagsConfig();
+                        FileConfiguration gui = plugin.cl.GuiConfig.getConfig();
+
                         Set<String> tagsArray = tags.getConfigurationSection("Tags").getKeys(false);
                         for(String s : tagsArray){
+                            /*
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b----------------------------------------" ));
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&bTag name: &6" +tags.getString("Tags."+s+ ".name")));
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&bTag display name: &6" +tags.getString("Tags."+s+ ".inGameTag")));
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&bTag permission: &6" +tags.getString("Tags."+s+ ".permission")));
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&b----------------------------------------"));
+                            */
+                            List<String> mensaje = (List<String>) gui.getList("Messages.GuiLore");
+                            for (String c : mensaje){
+                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', c
+                                        .replace("{tag_name}", tags.getString("Tags."+s+ ".name"))
+                                        .replace("{tag_displayName}", tags.getString("Tags."+s+ ".inGameTag"))
+                                        .replace("{tag_perm}", tags.getString("Tags."+s+ ".permission"))));
+                            }
                         }
                         return true;
 
@@ -147,6 +161,7 @@ public class MainCommand implements CommandExecutor {
         p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bzAngelTags tag set <tag> &8&l» &f set a tag"));
         p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bzAngelTags gui &8&l» &f open plugin gui "));
         p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bzAngelTags tag disable &8&l» &f open plugin gui "));
+        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bzAngelTags help &8&l» &f view the help of the plugin "));
 
     }
 }

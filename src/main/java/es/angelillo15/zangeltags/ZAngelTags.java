@@ -32,7 +32,7 @@ public final class ZAngelTags extends JavaPlugin {
     public void onEnable() {
 
         // Plugin startup logic
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "\n &bVersion: "+ version+" \n &b" +
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "\n &bVersion: "+ version+" \n " +
                 "███████╗ █████╗ ███╗   ██╗ ██████╗ ███████╗██╗  ████████╗ █████╗  ██████╗ ███████╗\n" +
                 "╚══███╔╝██╔══██╗████╗  ██║██╔════╝ ██╔════╝██║  ╚══██╔══╝██╔══██╗██╔════╝ ██╔════╝\n" +
                 "  ███╔╝ ███████║██╔██╗ ██║██║  ███╗█████╗  ██║     ██║   ███████║██║  ███╗███████╗\n" +
